@@ -3,6 +3,7 @@ from django.views.generic import FormView, TemplateView
 
 from daddypunmaster3000.forms import JokeForm
 from daddypunmaster3000.models import Joke
+from daddypunmaster3000.serializers import JokeSerializer
 
 
 class Choose(TemplateView):
@@ -41,5 +42,8 @@ class AddJoke(FormView):
     def get_context_data(self, **kwargs):
         kwargs['group_1'] = Joke.objects.filter(group_id=1).count()
         kwargs['group_2'] = Joke.objects.filter(group_id=2).count()
+        queryset = Joke.objects.all()
+        serializer = JokeSerializer(queryset, many=True)
+        kwargs['jokes'] = serializer.data
 
         return super(AddJoke, self).get_context_data(**kwargs)
