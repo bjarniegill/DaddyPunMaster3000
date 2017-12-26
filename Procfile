@@ -1,1 +1,1 @@
-web: gunicorn daddypunmaster3000.wsgi
+web: gunicorn daddypunmaster3000.wsgi --log-file -
