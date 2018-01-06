@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'daddypunmaster3000.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'joke_db',
+        'NAME': 'jokedb',
         'USER': config('DB_USERNAME'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
