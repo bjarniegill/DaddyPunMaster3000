@@ -7,7 +7,7 @@ from daddypunmaster3000.serializers import JokeSerializer
 
 
 class Choose(TemplateView):
-    template_name = 'templates/Choose.html'
+    template_name = 'templates/choose.html'
 
 
 class Jokes(TemplateView):
