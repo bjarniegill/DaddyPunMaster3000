@@ -15,3 +15,15 @@
 .app-text-color {
     color: white;
 }
+
+.errorlist {
+    color: #D8000C;
+    background-color: #FFBABA;
+    margin: 10px 0;
+    padding: 12px;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    vertical-align: baseline;
+    list-style-type: none;
+}

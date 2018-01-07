@@ -3,8 +3,10 @@
 
 {% block base %}
     <input id="group-id" type="hidden" value="{{ group_id }}">
+    <input id="session-id" type="hidden" value="{{ session_id }}">
     <input id="joke-id" type="hidden" value="">
 
+    <h2 class="jumbotron-heading lead app-text-color">Session: <strong>{{ session_id }}</strong></h2>
     <h2 class="jumbotron-heading lead app-text-color">You are a member of group nr.{{ group_id }}</h2>
     <div id="joke-error" class="alert alert-danger" role="alert" style="display: none;"></div>
 

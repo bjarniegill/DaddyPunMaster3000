@@ -1,6 +1,7 @@
 import json
 
 from django.db import models
+from django.urls import reverse
 
 
 class Joke(models.Model):
@@ -9,7 +10,8 @@ class Joke(models.Model):
     group_id = models.PositiveIntegerField()
 
 
-class GameStatus(models.Model):
+class GameSession(models.Model):
+    session_id = models.CharField(max_length=4, unique=True)
     used_jokes = models.CharField(max_length=512, default='[]')
 
     def get_used_jokes(self):
@@ -23,3 +25,5 @@ class GameStatus(models.Model):
         self.used_jokes = json.dumps(used_jokes)
         self.save()
 
+    def get_absolute_url(self):
+        return reverse('choose', args=[self.session_id])

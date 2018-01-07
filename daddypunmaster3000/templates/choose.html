@@ -1,10 +1,10 @@
 {% extends 'templates/base.html' %}
 
 {% block base %}
-    <h2 class="jumbotron-heading">Welcome to the Daddy Pun Master 3000</h2>
+    <h2 class="jumbotron-heading app-text-color">You session id: <strong>{{ session_id }}</strong></h2>
     <h3 class="lead text-muted">Please select a group</h3>
     <p>
-        <a href="/group/1" class="btn btn-lg btn-primary">Group 1</a>
-        <a href="/group/2" class="btn btn-lg btn-primary">Group 2</a>
+        <a href="{{ session_id }}/group/1" class="btn btn-lg btn-primary">Group 1</a>
+        <a href="{{ session_id }}/group/2" class="btn btn-lg btn-primary">Group 2</a>
     </p>
 {% endblock %}

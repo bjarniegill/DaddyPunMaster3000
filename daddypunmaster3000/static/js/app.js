@@ -24,10 +24,11 @@ $(document).ready(function() {
     $(commitButton).button("refresh");
 
     var groupId = $("#group-id").val();
+    var sessionId = $("#session-id").val();
     clearJokeTemplate();
 
     $("#get-new-joke").click(function() {
-        $.get( "/api/joke/" + groupId, function(result, status, jqXHR) {
+        $.get("/api/joke/" + groupId + "/" + sessionId, function(result, status, jqXHR) {
             if (jqXHR.status === 204) {
                 $("#joke-error").text("Sorry no more jokes.");
                 $("#joke-error").show();
@@ -49,7 +50,8 @@ $(document).ready(function() {
 
     $("#commit-to-joke").click(function() {
         var jokeId = $("#joke-id").val();
-        $.post("/api/commit/", { joke_id: jokeId }, function(data) {
+        var sessionId = $("#session-id").val();
+        $.post("/api/commit/", { joke_id: jokeId, session_id: sessionId }, function(data) {
             appendCommitedJoke($("#question").text(), $("#answer").text());
             setupJokeTemplate();
             $(commitButton).attr("disabled", "disabled");
@@ -64,5 +66,12 @@ $(document).ready(function() {
 
     $("#clear-jokes").click(function() {
         $("#joke-list").empty();
+    });
+
+    $("#create-session").click(function() {
+        $.get("/api/create/", function(result, status, jqXHR) {
+            var session_id = result
+            window.location = "/" + session_id;
+        });
     });
 });

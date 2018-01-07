@@ -1,15 +1,20 @@
-from daddypunmaster3000.models import GameStatus
+import random
+import string
+
+from daddypunmaster3000.models import GameSession
 
 
-def get_game_status():
-    objects = GameStatus.objects.all()
-    if len(objects) > 1:
-        raise ValueError('There is more than one GameStatus object')
-    elif len(objects) == 1:
-        game_status = objects.first()
-    else:
-        game_status = GameStatus()
-        game_status.save()
+def create_session():
 
-    return game_status
+    while True:
+        random_id = ''.join(
+            random.choice(string.ascii_lowercase + string.digits)
+            for _ in range(4)
+        )
+        try:
+            GameSession.objects.get(session_id=random_id)
+        except GameSession.DoesNotExist:
+            game_status = GameSession(session_id=random_id)
+            game_status.save()
 
+            return random_id
