@@ -2,14 +2,14 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import FormView, TemplateView
 
-from daddypunmaster3000.forms import JoinSession, JokeForm
+from daddypunmaster3000.forms import JoinSessionForm, JokeForm, ResetSessionForm
 from daddypunmaster3000.models import Joke, GameSession
 from daddypunmaster3000.serializers import JokeSerializer
 
 
 class PickSession(FormView):
     template_name = 'templates/pick_session.html'
-    form_class = JoinSession
+    form_class = JoinSessionForm
     success_url = '/'
 
     def form_valid(self, form):
@@ -82,3 +82,23 @@ class AddJoke(FormView):
         kwargs['jokes'] = serializer.data
 
         return super(AddJoke, self).get_context_data(**kwargs)
+
+
+class ResetSessions(FormView):
+    template_name = 'templates/reset_session.html'
+    form_class = ResetSessionForm
+    success_url = '/reset/'
+
+    def form_valid(self, form):
+        if form.is_valid():
+            reset_key = form.data.get('reset_key')
+            if reset_key == "penis":
+                GameSession.objects.all().delete()
+
+        return super(ResetSessions, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ResetSessions, self).get_context_data(**kwargs)
+        context['sessions'] = GameSession.objects.all()
+
+        return context

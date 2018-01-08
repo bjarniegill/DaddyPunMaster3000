@@ -13,6 +13,8 @@ class Joke(models.Model):
 class GameSession(models.Model):
     session_id = models.CharField(max_length=4, unique=True)
     used_jokes = models.CharField(max_length=512, default='[]')
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def get_used_jokes(self):
         return json.loads(self.used_jokes)

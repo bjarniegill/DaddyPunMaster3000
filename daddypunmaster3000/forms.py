@@ -31,8 +31,7 @@ class UseJokeForm(forms.Form):
     joke_id = forms.IntegerField(min_value=0)
 
 
-class JoinSession(forms.Form):
-    error_css_class = 'hello'
+class JoinSessionForm(forms.Form):
 
     session_id = forms.CharField(
         max_length=4,
@@ -49,3 +48,11 @@ class JoinSession(forms.Form):
             raise ValidationError('Session does not exist', code='invalid')
 
         return session_id
+
+
+class ResetSessionForm(forms.Form):
+
+    reset_key = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
