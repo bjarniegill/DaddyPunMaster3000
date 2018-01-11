@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from daddypunmaster3000.models import GameSession, Joke
 from daddypunmaster3000.serializers import JokeSerializer
-from daddypunmaster3000.utils import create_session
+from daddypunmaster3000.utils import create_session, delete_old_sessions
 
 
 class RetrieveRandomJoke(APIView):
@@ -54,6 +54,7 @@ class CommitToJoke(APIView):
 class CreateSession(APIView):
 
     def get(self, request):
+        delete_old_sessions()
         random_id = create_session()
 
         return Response(random_id, status.HTTP_200_OK)

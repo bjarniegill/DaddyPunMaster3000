@@ -1,3 +1,4 @@
+import datetime
 import random
 import string
 
@@ -18,3 +19,13 @@ def create_session():
             game_status.save()
 
             return random_id
+
+
+def delete_old_sessions():
+
+    sessions = GameSession.objects.all()
+    for session in sessions:
+        session_delta_date = session.updated + datetime.timedelta(days=1)
+        session_naive = session_delta_date.replace(tzinfo=None)
+        if session_naive < datetime.datetime.now().replace(tzinfo=None):
+            session.delete()
