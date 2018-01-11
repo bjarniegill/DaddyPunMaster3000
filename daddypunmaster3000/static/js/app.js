@@ -56,7 +56,6 @@ $(document).ready(function() {
             setupJokeTemplate();
             $(commitButton).attr("disabled", "disabled");
             $(commitButton).button("refresh");
-
         }).fail(function(e) {
             $("#joke-error").text("Joke has already been taken by another user");
             $("#joke-error").show();
